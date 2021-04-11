@@ -13,14 +13,6 @@ loader.load("../models/garfield/scene.gltf", (model) => {
   scene.add(kunai);
 });
 
-const path = "../models/tex/freepebble02/";
-const textureLoader = new THREE.TextureLoader();
-const normalTexture = textureLoader.load(path + "Normal_Map.jpg");
-const diffuseTexture = textureLoader.load(path + "Diffuse.jpg");
-const specularMap = textureLoader.load(path + "Specular_Map.jpg");
-const roughMap = textureLoader.load(path + "Roughness.jpg");
-const bumpMap = textureLoader.load(path + "Bump_Map.jpg");
-
 //Camera
 camera.position.set(0, 6, 10);
 camera.lookAt(0, 0, 0);
