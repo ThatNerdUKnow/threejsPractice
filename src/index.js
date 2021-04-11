@@ -1,34 +1,34 @@
-import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { scene, renderer, camera, gui } from "./common.js";
 import { mouseX, mouseY } from "./utils.js";
+import { PointLight, Clock } from "../node_modules/three/build/three.module.js";
 
-var kunai;
+var reiPlush;
 
 // Loading
 const loader = new GLTFLoader();
-loader.load("../models/garfield/scene.gltf", (model) => {
-  model.scene.scale.set(0.03, 0.03, 0.03);
-  kunai = model.scene;
-  scene.add(kunai);
+loader.load("../models/rei/scene.gltf", (model) => {
+  model.scene.scale.set(10, 10, 10);
+  reiPlush = model.scene;
+  scene.add(reiPlush);
 });
 
 //Camera
 camera.position.set(0, 6, 10);
-camera.lookAt(0, 0, 0);
+camera.lookAt(0, 5, 0);
 
 // Lights
 var lights = [];
 
-const pointLight = new THREE.PointLight(0xffffff, 2.3);
+const pointLight = new PointLight(0xffffff, 1);
 pointLight.position.set(20, 5.1, 20);
 lights.push(pointLight);
 
-const pointLight2 = new THREE.PointLight(0xffffff, 1);
+const pointLight2 = new PointLight(0xffffff, 0.7);
 pointLight2.position.set(-12.3, 0, 7.7);
 lights.push(pointLight2);
 
-const pointLight3 = new THREE.PointLight(0xffffff, 4.7);
+const pointLight3 = new PointLight(0xffffff, 3);
 pointLight3.position.set(0, 20, -4.9);
 lights.push(pointLight3);
 
@@ -44,17 +44,14 @@ lights.forEach((light) => {
   gui.add(light, "intensity", 0, 20, 0.1);
 });
 
-const clock = new THREE.Clock();
+const clock = new Clock();
 
 function animate() {
   const elapsedTime = clock.getElapsedTime();
 
-  if (kunai) {
-    kunai.rotation.y = 0.5 * elapsedTime;
-    //kunai.rotation.x = 0.25 * elapsedTime;
+  if (reiPlush) {
+    reiPlush.rotation.y = 0.5 * elapsedTime;
   }
-
-  //sphere.rotation.x += 0.01;
 
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
