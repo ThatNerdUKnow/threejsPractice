@@ -1,7 +1,13 @@
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { scene, renderer, camera, gui } from "./common.js";
 import { mouseX, mouseY } from "./utils.js";
-import { PointLight, Clock } from "../node_modules/three/build/three.module.js";
+import {
+  PointLight,
+  Clock,
+  AudioListener,
+  AudioLoader,
+  Audio,
+} from "../node_modules/three/build/three.module.js";
 
 var reiPlush;
 
@@ -42,6 +48,22 @@ lights.forEach((light) => {
   gui.add(light.position, "y", -20, 20, 0.1);
   gui.add(light.position, "z", -20, 20, 0.1);
   gui.add(light, "intensity", 0, 20, 0.1);
+});
+
+// Sound
+
+const listener = new AudioListener();
+camera.add(listener);
+
+const sound = new Audio(listener);
+
+const audioLoader = new AudioLoader();
+audioLoader.load("../sounds/flyMeToTheMoon.mp3", function (buffer) {
+  sound.setBuffer(buffer);
+  sound.setLoop(true);
+  sound.setVolume(0.5);
+  sound.play();
+  console.log("Playing sound");
 });
 
 const clock = new Clock();
