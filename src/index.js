@@ -36,23 +36,6 @@ lights.forEach((light) => {
   scene.add(light);
 });
 
-// Objects
-const sphereGeometry = new THREE.SphereGeometry(2.5, 32, 32);
-
-// Materials
-
-const material = new THREE.MeshStandardMaterial();
-//material.metalness = 0.7;
-//material.roughness = 0.2;
-material.bumpMap = bumpMap;
-material.normalMap = normalTexture;
-material.map = diffuseTexture;
-material.roughnessMap = roughMap;
-
-// Meshes
-const sphere = new THREE.Mesh(sphereGeometry, material);
-//scene.add(sphere);
-
 // GUI
 lights.forEach((light) => {
   gui.add(light.position, "x", -20, 20, 0.1);
@@ -72,8 +55,6 @@ function animate() {
   }
 
   //sphere.rotation.x += 0.01;
-
-  sphere.rotation.y = 0.5 * elapsedTime;
 
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
